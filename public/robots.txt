@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Important pages for crawlers
+Allow: /about
+Allow: /cv-theque
+Allow: /entreprise
+
+# Allow images to be crawled
+Allow: /images/
+Allow: /icons/
+
+# Block admin and API routes
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /auth/
+
+# Sitemap location
+Sitemap: https://www.forum-ecc.ma/sitemap.xml
+
+# Crawl delay to be respectful
+Crawl-delay: 1

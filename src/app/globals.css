@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Font family variables */
+  --font-sans: var(--font-montserrat), Verdana, ui-sans-serif, system-ui, sans-serif;
+  --font-body: Verdana, ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-montserrat), Verdana, ui-sans-serif, system-ui, sans-serif;
+  
+  /* Typography settings */
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-tight: 1.25;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Custom properties for more consistent styling */
+  --header-height: 5rem;
+  --card-border-radius: 1rem;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  scroll-behavior: smooth;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #006064;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00838f;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-800 to-secondary-800 dark:from-primary-500 dark:to-secondary-500;
+  }
+  
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary-700;
+  }
+  
+  .bg-gradient-secondary {
+    @apply bg-gradient-to-r from-secondary to-secondary-700;
+  }
+}
+
+@layer base {
+  :root {
+    --swiper-theme-color: #006064;
+    --swiper-pagination-bullet-inactive-color: #9e9e9e;
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    --swiper-pagination-bullet-size: 12px;
+    --swiper-pagination-bullet-horizontal-gap: 8px;
+  }
+  
+  /* Apply font families */
+  html, body {
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+  
+  button, a, input, label {
+    font-family: var(--font-sans);
+  }
+}
+
+/* Typography utility classes */
+.text-heading {
+  font-family: var(--font-heading);
+}
+
+.text-body {
+  font-family: var(--font-body);
+}
+
+.text-sans {
+  font-family: var(--font-sans);
+}
+
+/* Apply modern typography defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: normal;
+  line-height: var(--line-height-tight);
+  font-weight: 600;
+}
+
+p, li, input, textarea {
+  font-family: var(--font-body);
+  line-height: var(--line-height-relaxed);
+}
+
+button, a, label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-700 text-white hover:from-primary-700 hover:to-primary;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary to-secondary-700 text-white hover:from-secondary-700 hover:to-secondary;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-5xl font-bold mb-8 text-center leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 text-center max-w-3xl mx-auto;
+  }
+
+  .highlight {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-800 to-primary-900 dark:from-primary-400 dark:to-primary;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 dark:border-gray-700;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/80 dark:bg-black/50 border border-gray-200 dark:border-gray-800;
+  }
+}
+
+/* Mobile image optimizations */
+@media (max-width: 768px) {
+  .hero-image {
+    object-position: center center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  /* Ensure images fill their containers properly on mobile */
+  img[data-fill="true"] {
+    object-fit: cover !important;
+    object-position: center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Fix for iOS Safari viewport height issues */
+@supports (-webkit-touch-callout: none) {
+  .hero-section {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Team Swiper Pagination Spacing */
+.team-swiper .swiper-pagination {
+  bottom: 0 !important;
+  padding-top: 24px;
+}
+
+.team-swiper .swiper-pagination-bullet {
+  margin: 0 6px !important;
+}
