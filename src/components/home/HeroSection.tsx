@@ -70,7 +70,7 @@ export const HeroSection = () => {
           transition={{ duration: 1 }}
         >
           {/* Image Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/40 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/10 z-10" />
           
           {/* Background Image */}
           <div className="absolute inset-0 w-full h-full">

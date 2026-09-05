@@ -60,18 +60,18 @@ const Header = () => {
               <motion.div
                 className="flex whitespace-nowrap"
                 animate={{
-                  x: [0, -1920],
+                  x: ['0%', '-50%'],
                 }}
                 transition={{
                   x: {
                     repeat: Infinity,
                     repeatType: "loop",
-                    duration: 30,
+                    duration: 40,
                     ease: "linear",
                   },
                 }}
               >
-                {[...Array(3)].map((_, index) => (
+                {[...Array(2)].map((_, index) => (
                   <div key={index} className="flex items-center">
                     {shuttleMessages.map((message, msgIndex) => (
                       <span

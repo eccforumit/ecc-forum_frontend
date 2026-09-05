@@ -43,8 +43,24 @@ const teamMembers = [
     linkedin: '#',
     mail: '#'
   },
-  {
+   {
     id: 4,
+    name: 'Solange ILINGA',
+    position: 'IT',
+    image: '/images/team/solange-ilinga.jpg',
+    linkedin: '#',
+    mail: '#'
+  },
+   {
+    id: 5,
+    name: 'Ahmed ZHIRI',
+    position: 'IT',
+    image: '/images/team/ahmed-zhiri.jpg',
+    linkedin: '#',
+    mail: '#'
+  },
+  {
+    id: 6,
     name: 'Mohamed Zayd KASIMI',
     position: 'Trésorier',
     image: '/images/team/zayd-kasimi.jpg',
@@ -52,7 +68,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 5,
+    id: 7,
     name: 'Fatima EL MACHRAFI',
     position: 'Prospectrice',
     image: '/images/team/fatima-elmachrafi.jpg',
@@ -60,7 +76,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 6,
+    id: 8,
     name: 'Douae HARRAK',
     position: 'Prospectrice',
     image: '/images/team/douae-harrak.jpg',
@@ -68,7 +84,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 7,
+    id: 9,
     name: 'Zhour MESKOUR',
     position: 'Prospectrice',
     image: '/images/team/zhour-meskour.jpg',
@@ -76,7 +92,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 8,
+    id: 10,
     name: 'Taha SADIKI',
     position: 'Prospecteur',
     image: '/images/team/taha-sadiki.jpg',
@@ -84,7 +100,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 9,
+    id: 11,
     name: 'Mohamed Amine SABIRI',
     position: 'Analyste',
     image: '/images/team/amine-sabiri.jpg',
@@ -92,7 +108,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 10,
+    id: 12,
     name: 'Mohamed CHAKIR',
     position: 'Analyste',
     image: '/images/team/mohamed-chakir.jpg',
@@ -100,7 +116,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 11,
+    id: 13,
     name: 'Mariam KRISSE',
     position: 'Analyste',
     image: '/images/team/mariam-krisse.jpg',
@@ -108,7 +124,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 12,
+    id: 14,
     name: 'Ranya ADIOUANE',
     position: 'Coordinatrice',
     image: '/images/team/ranya-adiouane.jpg',
@@ -116,7 +132,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 13,
+    id: 15,
     name: 'Lina ASSABANE',
     position: 'Coordinatrice',
     image: '/images/team/lina-assabane.jpg',
@@ -124,7 +140,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 14,
+    id: 16,
     name: 'Aya KHABIR',
     position: 'Logistique',
     image: '/images/team/aya-khabir.jpg',
@@ -132,7 +148,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 15,
+    id: 17,
     name: 'Douae TOUIYATE',
     position: 'Logistique',
     image: '/images/team/douae-touiyate.jpg',
@@ -140,7 +156,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 16,
+    id: 18,
     name: 'Fatima-Ezzahra ELKACHTAOUI',
     position: 'Logistique',
     image: '/images/team/fatima-ezzahra-elkachtaoui.jpg',
@@ -148,7 +164,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 17,
+    id: 19,
     name: 'Omar OUAJIF',
     position: 'Communication',
     image: '/images/team/omar-ouajif.jpg',
@@ -156,7 +172,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 18,
+    id: 20,
     name: 'Nada HASSAR',
     position: 'Communication',
     image: '/images/team/nada-hassar.jpg',
@@ -164,7 +180,7 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 19,
+    id: 21,
     name: 'Laila EL ARARI',
     position: 'Design',
     image: '/images/team/laila-elarari.jpg',
@@ -172,26 +188,10 @@ const teamMembers = [
     mail: '#'
   },
   {
-    id: 20,
+    id: 22,
     name: 'Wissal AIT ALI',
     position: 'Design',
     image: '/images/team/wissal-aitali.jpg',
-    linkedin: '#',
-    mail: '#'
-  },
-  {
-    id: 21,
-    name: 'Solange ILINGA',
-    position: 'IT',
-    image: '/images/team/solange-ilinga.jpg',
-    linkedin: '#',
-    mail: '#'
-  },
-  {
-    id: 22,
-    name: 'Ahmed ZHIRI',
-    position: 'IT',
-    image: '/images/team/ahmed-zhiri.jpg',
     linkedin: '#',
     mail: '#'
   },
