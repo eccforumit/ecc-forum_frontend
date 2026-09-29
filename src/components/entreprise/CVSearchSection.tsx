@@ -25,10 +25,8 @@ const useProfiles = () => {
         school: 'ECC'
       };
       const data = await companyService.getStudentProfiles(filters);
-      console.log('✅ Profils ECC chargés:', data.length, data);
       setProfiles(data);
     } catch (err) {
-      console.error('❌ Erreur chargement profils:', err);
       setError(err instanceof Error ? err : new Error('Erreur lors du chargement des profils'));
     } finally {
       setIsLoading(false);
@@ -49,6 +47,9 @@ export const CVSearchSection = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [majorFilter, setMajorFilter] = useState<string>('');
   const [schoolYearFilter, setSchoolYearFilter] = useState<string>('');
+  const [skillFilter, setSkillFilter] = useState<string>('');
+  const [availableOnly, setAvailableOnly] = useState(false);
+  const [sortBy, setSortBy] = useState<'name' | 'year' | 'skills'>('name');
   const [expandedProfileId, setExpandedProfileId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [profilesPerPage, setProfilesPerPage] = useState(10);
@@ -62,42 +63,74 @@ export const CVSearchSection = () => {
   const majors = Array.from(new Set(allProfiles?.map(p => p.major).filter(Boolean) || []));
   // Remove school filter since we only show ECC
   const schoolYears = Array.from(new Set(allProfiles?.map(p => p.school_year).filter(Boolean) || []));
-  
+  // Distinct skills across all profiles, for the skill filter dropdown
+  const allSkills = Array.from(
+    new Set((allProfiles || []).flatMap(p => p.skills || []).filter(Boolean))
+  ).sort((a, b) => a.localeCompare(b));
+
+  const activeFilterCount =
+    (majorFilter ? 1 : 0) +
+    (schoolYearFilter ? 1 : 0) +
+    (skillFilter ? 1 : 0) +
+    (availableOnly ? 1 : 0);
+
   // Apply filters whenever filter criteria or profiles change
   useEffect(() => {
     if (!allProfiles) return;
-    
-    console.log('🔍 Filtrage côté client - Profils disponibles:', allProfiles.length);
-    
+
     let result = [...allProfiles];
-    
+
     // Apply search term
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      result = result.filter(profile => 
-        profile.first_name.toLowerCase().includes(term) || 
-        profile.last_name.toLowerCase().includes(term) || 
-        profile.major.toLowerCase().includes(term) || 
+      result = result.filter(profile =>
+        profile.first_name.toLowerCase().includes(term) ||
+        profile.last_name.toLowerCase().includes(term) ||
+        profile.major.toLowerCase().includes(term) ||
         (profile.skills || []).some(skill => skill.toLowerCase().includes(term))
       );
-      console.log('  → Après recherche:', result.length);
     }
-    
+
     // Apply major filter
     if (majorFilter) {
       result = result.filter(profile => profile.major === majorFilter);
-      console.log('  → Après filtre major:', result.length);
     }
-    
+
     // Apply school year filter
     if (schoolYearFilter) {
       result = result.filter(profile => profile.school_year === schoolYearFilter);
-      console.log('  → Après filtre année:', result.length);
     }
-    
-    console.log('✅ Profils filtrés finaux:', result.length);
+
+    // Apply skill filter (exact skill match, case-insensitive)
+    if (skillFilter) {
+      const skill = skillFilter.toLowerCase();
+      result = result.filter(profile =>
+        (profile.skills || []).some(s => s.toLowerCase() === skill)
+      );
+    }
+
+    // Only profiles with a downloadable CV
+    if (availableOnly) {
+      result = result.filter(profile => Boolean(profile.cv_file_url));
+    }
+
+    // Sorting
+    result.sort((a, b) => {
+      switch (sortBy) {
+        case 'year':
+          return String(a.school_year).localeCompare(String(b.school_year));
+        case 'skills':
+          return (b.skills || []).length - (a.skills || []).length;
+        case 'name':
+        default:
+          return `${a.first_name} ${a.last_name}`.localeCompare(
+            `${b.first_name} ${b.last_name}`
+          );
+      }
+    });
+
     setFilteredProfiles(result);
-  }, [searchTerm, majorFilter, schoolYearFilter, allProfiles]);
+  }, [searchTerm, majorFilter, schoolYearFilter, skillFilter, availableOnly, sortBy, allProfiles]);
   
   const handleToggleExpand = (id: number) => {
     setExpandedProfileId(expandedProfileId === id ? null : id);
@@ -107,6 +140,9 @@ export const CVSearchSection = () => {
     setSearchTerm('');
     setMajorFilter('');
     setSchoolYearFilter('');
+    setSkillFilter('');
+    setAvailableOnly(false);
+    setSortBy('name');
     setCurrentPage(1);
   };
   
@@ -185,7 +221,7 @@ export const CVSearchSection = () => {
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, majorFilter, schoolYearFilter]);
+  }, [searchTerm, majorFilter, schoolYearFilter, skillFilter, availableOnly, sortBy]);
   
   // Adjust profiles per page when switching view mode
   useEffect(() => {
@@ -413,11 +449,11 @@ export const CVSearchSection = () => {
         >
           <FiFilter size={18} />
           <span className="md:hidden">
-            Filtres{(majorFilter || schoolYearFilter) && ` (${(majorFilter ? 1 : 0) + (schoolYearFilter ? 1 : 0)})`}
+            Filtres{activeFilterCount > 0 && ` (${activeFilterCount})`}
           </span>
           <span className="hidden md:inline">
-            {majorFilter || schoolYearFilter ? (
-              <span className="font-semibold text-primary">Filtres actifs ({(majorFilter ? 1 : 0) + (schoolYearFilter ? 1 : 0)})</span>
+            {activeFilterCount > 0 ? (
+              <span className="font-semibold text-primary">Filtres actifs ({activeFilterCount})</span>
             ) : (
               'Filtres'
             )}
@@ -459,8 +495,8 @@ export const CVSearchSection = () => {
                 <option value="" className="text-gray-900 dark:text-gray-100">Toutes les années</option>
                 {schoolYears.map((year) => (
                   <option key={year} value={year} className="text-gray-900 dark:text-gray-100">
-                    {year === 'Laureat' 
-                      ? 'Lauréat' 
+                    {year === 'Laureat'
+                      ? 'Lauréat'
                       : year === 'Futur_diplome'
                       ? 'Futur diplomé'
                       : year === 'Cesure'
@@ -470,10 +506,48 @@ export const CVSearchSection = () => {
                 ))}
               </select>
             </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Compétence</label>
+              <select
+                value={skillFilter}
+                onChange={(e) => setSkillFilter(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              >
+                <option value="" className="text-gray-900 dark:text-gray-100">Toutes les compétences</option>
+                {allSkills.map((skill) => (
+                  <option key={skill} value={skill} className="text-gray-900 dark:text-gray-100">
+                    {skill}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Trier par</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as 'name' | 'year' | 'skills')}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              >
+                <option value="name" className="text-gray-900 dark:text-gray-100">Nom (A → Z)</option>
+                <option value="year" className="text-gray-900 dark:text-gray-100">Année d&apos;études</option>
+                <option value="skills" className="text-gray-900 dark:text-gray-100">Nombre de compétences</option>
+              </select>
+            </div>
           </div>
-          
-          <div className="flex justify-end mt-4">
-            <Button 
+
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-4">
+            <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={availableOnly}
+                onChange={(e) => setAvailableOnly(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+              />
+              CV disponible uniquement
+            </label>
+            <Button
               onClick={clearFilters}
               variant="outline"
               className="text-sm"
