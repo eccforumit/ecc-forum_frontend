@@ -25,8 +25,15 @@ const useProfiles = () => {
         school: 'ECC'
       };
       const data = await companyService.getStudentProfiles(filters);
+<<<<<<< HEAD
       setProfiles(data);
     } catch (err) {
+=======
+      console.log('✅ Profils ECC chargés:', data.length, data);
+      setProfiles(data);
+    } catch (err) {
+      console.error('❌ Erreur chargement profils:', err);
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
       setError(err instanceof Error ? err : new Error('Erreur lors du chargement des profils'));
     } finally {
       setIsLoading(false);
@@ -47,9 +54,12 @@ export const CVSearchSection = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [majorFilter, setMajorFilter] = useState<string>('');
   const [schoolYearFilter, setSchoolYearFilter] = useState<string>('');
+<<<<<<< HEAD
   const [skillFilter, setSkillFilter] = useState<string>('');
   const [availableOnly, setAvailableOnly] = useState(false);
   const [sortBy, setSortBy] = useState<'name' | 'year' | 'skills'>('name');
+=======
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
   const [expandedProfileId, setExpandedProfileId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [profilesPerPage, setProfilesPerPage] = useState(10);
@@ -63,6 +73,7 @@ export const CVSearchSection = () => {
   const majors = Array.from(new Set(allProfiles?.map(p => p.major).filter(Boolean) || []));
   // Remove school filter since we only show ECC
   const schoolYears = Array.from(new Set(allProfiles?.map(p => p.school_year).filter(Boolean) || []));
+<<<<<<< HEAD
   // Distinct skills across all profiles, for the skill filter dropdown
   const allSkills = Array.from(
     new Set((allProfiles || []).flatMap(p => p.skills || []).filter(Boolean))
@@ -131,6 +142,44 @@ export const CVSearchSection = () => {
 
     setFilteredProfiles(result);
   }, [searchTerm, majorFilter, schoolYearFilter, skillFilter, availableOnly, sortBy, allProfiles]);
+=======
+  
+  // Apply filters whenever filter criteria or profiles change
+  useEffect(() => {
+    if (!allProfiles) return;
+    
+    console.log('🔍 Filtrage côté client - Profils disponibles:', allProfiles.length);
+    
+    let result = [...allProfiles];
+    
+    // Apply search term
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      result = result.filter(profile => 
+        profile.first_name.toLowerCase().includes(term) || 
+        profile.last_name.toLowerCase().includes(term) || 
+        profile.major.toLowerCase().includes(term) || 
+        (profile.skills || []).some(skill => skill.toLowerCase().includes(term))
+      );
+      console.log('  → Après recherche:', result.length);
+    }
+    
+    // Apply major filter
+    if (majorFilter) {
+      result = result.filter(profile => profile.major === majorFilter);
+      console.log('  → Après filtre major:', result.length);
+    }
+    
+    // Apply school year filter
+    if (schoolYearFilter) {
+      result = result.filter(profile => profile.school_year === schoolYearFilter);
+      console.log('  → Après filtre année:', result.length);
+    }
+    
+    console.log('✅ Profils filtrés finaux:', result.length);
+    setFilteredProfiles(result);
+  }, [searchTerm, majorFilter, schoolYearFilter, allProfiles]);
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
   
   const handleToggleExpand = (id: number) => {
     setExpandedProfileId(expandedProfileId === id ? null : id);
@@ -140,9 +189,12 @@ export const CVSearchSection = () => {
     setSearchTerm('');
     setMajorFilter('');
     setSchoolYearFilter('');
+<<<<<<< HEAD
     setSkillFilter('');
     setAvailableOnly(false);
     setSortBy('name');
+=======
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
     setCurrentPage(1);
   };
   
@@ -221,7 +273,11 @@ export const CVSearchSection = () => {
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
+<<<<<<< HEAD
   }, [searchTerm, majorFilter, schoolYearFilter, skillFilter, availableOnly, sortBy]);
+=======
+  }, [searchTerm, majorFilter, schoolYearFilter]);
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
   
   // Adjust profiles per page when switching view mode
   useEffect(() => {
@@ -449,11 +505,19 @@ export const CVSearchSection = () => {
         >
           <FiFilter size={18} />
           <span className="md:hidden">
+<<<<<<< HEAD
             Filtres{activeFilterCount > 0 && ` (${activeFilterCount})`}
           </span>
           <span className="hidden md:inline">
             {activeFilterCount > 0 ? (
               <span className="font-semibold text-primary">Filtres actifs ({activeFilterCount})</span>
+=======
+            Filtres{(majorFilter || schoolYearFilter) && ` (${(majorFilter ? 1 : 0) + (schoolYearFilter ? 1 : 0)})`}
+          </span>
+          <span className="hidden md:inline">
+            {majorFilter || schoolYearFilter ? (
+              <span className="font-semibold text-primary">Filtres actifs ({(majorFilter ? 1 : 0) + (schoolYearFilter ? 1 : 0)})</span>
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
             ) : (
               'Filtres'
             )}
@@ -495,8 +559,13 @@ export const CVSearchSection = () => {
                 <option value="" className="text-gray-900 dark:text-gray-100">Toutes les années</option>
                 {schoolYears.map((year) => (
                   <option key={year} value={year} className="text-gray-900 dark:text-gray-100">
+<<<<<<< HEAD
                     {year === 'Laureat'
                       ? 'Lauréat'
+=======
+                    {year === 'Laureat' 
+                      ? 'Lauréat' 
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
                       : year === 'Futur_diplome'
                       ? 'Futur diplomé'
                       : year === 'Cesure'
@@ -506,6 +575,7 @@ export const CVSearchSection = () => {
                 ))}
               </select>
             </div>
+<<<<<<< HEAD
 
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Compétence</label>
@@ -548,6 +618,12 @@ export const CVSearchSection = () => {
               CV disponible uniquement
             </label>
             <Button
+=======
+          </div>
+          
+          <div className="flex justify-end mt-4">
+            <Button 
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
               onClick={clearFilters}
               variant="outline"
               className="text-sm"

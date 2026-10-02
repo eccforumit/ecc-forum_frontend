@@ -24,6 +24,7 @@ export const TimelineSection = () => {
     {
       id: 1,
       time: '8h - 9h',
+<<<<<<< HEAD
       title: "Café d'accueil.",
     },
     {
@@ -60,6 +61,50 @@ export const TimelineSection = () => {
       id: 8,
       time: '18h',
       title: "Clôture du Forum.",
+=======
+      title: "Accueil des entreprises, installation au niveau des stands et café d'accueil.",
+    },
+    {
+      id: 2,
+      time: '9h - 09h15',
+      title: "Mot du comité organisateur du Forum et de la Direction Générale (Amphithéâtre 1).",
+    },
+    {
+      id: 3,
+      time: '9h15-9h30',
+      title: "Mot de Monsieur le Ministre de l'Industrie et du Commerce, Ryad MEZZOUR.",
+    },
+    {
+      id: 4,
+      time: '9h30-10h',
+      title: "Inauguration des stands et tour du Ministre.",
+    },
+    {
+      id: 5,
+      time: '10h00-13h',
+      title: "Tour des stands.",
+    },
+    {
+      id: 6,
+      time: '13h-14h',
+      title: "Pause déjeuner.",
+    },
+    {
+      id: 7,
+      time: '14h10-15h30',
+      title: "Ateliers et présentations (Amphithéâtre 1)",
+      description: "Atelier 1: Groupe Attijari Wafa Bank\nAtelier 2: Schiele Maroc\nAtelier 3: BMCI Groupe BNP Paribas",
+    },
+    {
+      id: 8,
+      time: '15h30-17h30',
+      title: "Tour des stands",
+    },
+    {
+      id: 9,
+      time: '17h30-18h',
+      title: "Cérémonie de clôture.",
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
     },
   ];
 

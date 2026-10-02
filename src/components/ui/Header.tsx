@@ -14,9 +14,18 @@ const Header = () => {
   const [isInfoBarVisible, setIsInfoBarVisible] = useState(true);
   const fontStyles = useFontStyles();
 
+<<<<<<< HEAD
   // Message de navette : répété pour remplir le ruban défilant sans espace vide.
   const shuttleMessage = '🚌 Navette disponible — Technopark ⇄ ECC';
   const shuttleMessages = Array(6).fill(shuttleMessage);
+=======
+  // Messages de navette
+  const shuttleMessages = [
+      '🚌 Navette: Départ à 7h30 - Technopark -> ECC ',
+      '🚌 Navette: Départ à 9h00 - Technopark -> ECC ',
+      '🚌 Navette: Retour à 18h30 - ECC -> Technopark',
+  ];
+>>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
 
   // Handle scroll effect
   useEffect(() => {
