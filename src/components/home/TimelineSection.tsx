@@ -24,107 +24,79 @@ export const TimelineSection = () => {
     {
       id: 1,
       time: '8h - 9h',
-<<<<<<< HEAD
-      title: "Café d'accueil.",
-    },
-    {
-      id: 2,
-      time: '9h - 10h',
-      title: "Cérémonie d'ouverture, mot du comité.",
-    },
-    {
-      id: 3,
-      time: '10h - 10h30',
-      title: "Inauguration des stands.",
-    },
-    {
-      id: 4,
-      time: '10h30 - 13h',
-      title: "Tour des stands.",
-    },
-    {
-      id: 5,
-      time: '13h - 14h',
-      title: "Pause déjeuner.",
-    },
-    {
-      id: 6,
-      time: '14h',
-      title: "Arrivée des externes.",
-    },
-    {
-      id: 7,
-      time: '14h - 18h',
-      title: "Tour des stands (ouvert aux externes).",
-    },
-    {
-      id: 8,
-      time: '18h',
-      title: "Clôture du Forum.",
-=======
-      title: "Accueil des entreprises, installation au niveau des stands et café d'accueil.",
+      title:
+        "Accueil des entreprises, installation au niveau des stands et café d'accueil.",
     },
     {
       id: 2,
       time: '9h - 09h15',
-      title: "Mot du comité organisateur du Forum et de la Direction Générale (Amphithéâtre 1).",
+      title:
+        'Mot du comité organisateur du Forum et de la Direction Générale (Amphithéâtre 1).',
     },
     {
       id: 3,
-      time: '9h15-9h30',
-      title: "Mot de Monsieur le Ministre de l'Industrie et du Commerce, Ryad MEZZOUR.",
+      time: '9h15 - 9h30',
+      title:
+        "Mot de Monsieur le Ministre de l'Industrie et du Commerce, Ryad MEZZOUR.",
     },
     {
       id: 4,
-      time: '9h30-10h',
-      title: "Inauguration des stands et tour du Ministre.",
+      time: '9h30 - 10h',
+      title: 'Inauguration des stands et tour du Ministre.',
     },
     {
       id: 5,
-      time: '10h00-13h',
-      title: "Tour des stands.",
+      time: '10h00 - 13h',
+      title: 'Tour des stands.',
     },
     {
       id: 6,
-      time: '13h-14h',
-      title: "Pause déjeuner.",
+      time: '13h - 14h',
+      title: 'Pause déjeuner.',
     },
     {
       id: 7,
-      time: '14h10-15h30',
-      title: "Ateliers et présentations (Amphithéâtre 1)",
-      description: "Atelier 1: Groupe Attijari Wafa Bank\nAtelier 2: Schiele Maroc\nAtelier 3: BMCI Groupe BNP Paribas",
+      time: '14h10 - 15h30',
+      title: 'Ateliers et présentations (Amphithéâtre 1).',
+      description:
+        'Atelier 1 : Groupe Attijari Wafa Bank\nAtelier 2 : Schiele Maroc\nAtelier 3 : BMCI Groupe BNP Paribas',
     },
     {
       id: 8,
-      time: '15h30-17h30',
-      title: "Tour des stands",
+      time: '15h30 - 17h30',
+      title: 'Tour des stands.',
     },
     {
       id: 9,
-      time: '17h30-18h',
-      title: "Cérémonie de clôture.",
->>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
+      time: '17h30 - 18h',
+      title: 'Cérémonie de clôture.',
     },
   ];
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-white dark:bg-gray-800 relative overflow-hidden">
+    <section
+      ref={ref}
+      className="py-16 md:py-24 bg-white dark:bg-gray-800 relative overflow-hidden"
+    >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 -right-20 w-80 h-80 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-40 -left-20 w-72 h-72 bg-secondary/5 dark:bg-secondary/10 rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mb-12 md:mb-16"
         >
           <h2 className="section-title" style={fontStyles.heading}>
-            <span className="text-gray-900 dark:text-white">Programme de la</span> <GradientText variant="blue-green">Journée</GradientText>
+            <span className="text-gray-900 dark:text-white">
+              Programme de la
+            </span>{' '}
+            <GradientText variant="blue-green">Journée</GradientText>
           </h2>
+
           <p className="section-subtitle" style={fontStyles.body}>
             Découvrez le déroulement complet de notre événement
           </p>
@@ -144,36 +116,48 @@ export const TimelineSection = () => {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 className={`relative flex items-center ${
-                  index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'
+                  index % 2 === 0
+                    ? 'md:justify-start'
+                    : 'md:justify-end'
                 }`}
               >
                 {/* Content box */}
                 <div
                   className={`w-full md:w-5/12 pl-16 md:pl-0 ${
-                    index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'
+                    index % 2 === 0
+                      ? 'md:pr-12 md:text-right'
+                      : 'md:pl-12 md:text-left'
                   }`}
                 >
                   <div className="bg-white dark:bg-gray-900 rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 md:p-6 border border-gray-100 dark:border-gray-700">
                     <div
                       className={`text-primary-700 dark:text-primary-400 font-bold text-base md:text-lg mb-1.5 md:mb-2 text-left ${
-                        index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                        index % 2 === 0
+                          ? 'md:text-right'
+                          : 'md:text-left'
                       }`}
                       style={fontStyles.heading}
                     >
                       {item.time}
                     </div>
+
                     <h3
                       className={`text-sm md:text-base font-semibold text-gray-900 dark:text-white mb-1.5 md:mb-2 text-left ${
-                        index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                        index % 2 === 0
+                          ? 'md:text-right'
+                          : 'md:text-left'
                       }`}
                       style={fontStyles.heading}
                     >
                       {item.title}
                     </h3>
+
                     {item.description && (
                       <p
                         className={`text-gray-600 dark:text-gray-300 text-xs md:text-sm whitespace-pre-line text-left ${
-                          index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                          index % 2 === 0
+                            ? 'md:text-right'
+                            : 'md:text-left'
                         }`}
                         style={fontStyles.body}
                       >

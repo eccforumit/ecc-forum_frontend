@@ -14,18 +14,15 @@ const Header = () => {
   const [isInfoBarVisible, setIsInfoBarVisible] = useState(true);
   const fontStyles = useFontStyles();
 
-<<<<<<< HEAD
-  // Message de navette : répété pour remplir le ruban défilant sans espace vide.
-  const shuttleMessage = '🚌 Navette disponible — Technopark ⇄ ECC';
-  const shuttleMessages = Array(6).fill(shuttleMessage);
-=======
-  // Messages de navette
+  // Messages de navette répétés pour remplir le ruban défilant sans espace vide.
   const shuttleMessages = [
-      '🚌 Navette: Départ à 7h30 - Technopark -> ECC ',
-      '🚌 Navette: Départ à 9h00 - Technopark -> ECC ',
-      '🚌 Navette: Retour à 18h30 - ECC -> Technopark',
+    '🚌 Navette : Départ à 7h30 - Technopark → ECC',
+    '🚌 Navette : Départ à 9h00 - Technopark → ECC',
+    '🚌 Navette : Retour à 18h30 - ECC → Technopark',
+    '🚌 Navette : Départ à 7h30 - Technopark → ECC',
+    '🚌 Navette : Départ à 9h00 - Technopark → ECC',
+    '🚌 Navette : Retour à 18h30 - ECC → Technopark',
   ];
->>>>>>> 2b0915062c9ce75dc23d95839a6e023bee5ffd6c
 
   // Handle scroll effect
   useEffect(() => {
@@ -71,9 +68,9 @@ const Header = () => {
                 transition={{
                   x: {
                     repeat: Infinity,
-                    repeatType: "loop",
+                    repeatType: 'loop',
                     duration: 40,
-                    ease: "linear",
+                    ease: 'linear',
                   },
                 }}
               >
@@ -91,7 +88,7 @@ const Header = () => {
                   </div>
                 ))}
               </motion.div>
-              
+
               {/* Bouton de fermeture */}
               <button
                 onClick={() => setIsInfoBarVisible(false)}
@@ -118,34 +115,37 @@ const Header = () => {
       </AnimatePresence>
 
       <header
-          className={`fixed ${isInfoBarVisible ? 'top-8' : 'top-0'} left-0 right-0 z-50 transition-all duration-300 ${
-              isScrolled
-                  ? 'bg-white/95 dark:bg-gray-900/95 shadow-md backdrop-blur-sm'
-                  : 'bg-transparent'
-          }`}
+        className={`fixed ${
+          isInfoBarVisible ? 'top-8' : 'top-0'
+        } left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/95 dark:bg-gray-900/95 shadow-md backdrop-blur-sm'
+            : 'bg-transparent'
+        }`}
       >
-         <div className="container-custom mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/">
-                <div className="flex items-center" style={fontStyles.heading}>
-                    <Image
-                        src="/images/logo_normal.png"
-                        alt="Forum ECC Logo"
-                        width={60}
-                        height={60}
-                        className="h-8 md:h-10 w-auto mr-2 block dark:hidden"
-                    />
-                    <Image
-                        src="/images/logo_forum.png"
-                        alt="Forum ECC Logo"
-                        width={60}
-                        height={60}
-                        className="h-8 md:h-10 w-auto mr-2 hidden dark:block"
-                    />
-              <span className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-      Forum<span className="text-primary">ECC</span>
-    </span>
+        <div className="container-custom mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/">
+            <div className="flex items-center" style={fontStyles.heading}>
+              <Image
+                src="/images/logo_normal.png"
+                alt="Forum ECC Logo"
+                width={60}
+                height={60}
+                className="h-8 md:h-10 w-auto mr-2 block dark:hidden"
+              />
 
+              <Image
+                src="/images/logo_forum.png"
+                alt="Forum ECC Logo"
+                width={60}
+                height={60}
+                className="h-8 md:h-10 w-auto mr-2 hidden dark:block"
+              />
+
+              <span className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+                Forum<span className="text-primary">ECC</span>
+              </span>
             </div>
           </Link>
 
@@ -153,15 +153,15 @@ const Header = () => {
           <nav className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2">
             <ul className="flex space-x-8">
               {menuItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                        href={item.href}
-                        className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors"
-                        style={fontStyles.sans}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors"
+                    style={fontStyles.sans}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </nav>
@@ -170,10 +170,16 @@ const Header = () => {
           <div className="hidden md:block w-auto">
             <div className="flex items-center space-x-3">
               <ThemeToggle />
+
               <LinkButton href="/auth/login" variant="outline" size="sm">
                 Connexion
               </LinkButton>
-              <LinkButton href="/auth/signup/student" variant="primary" size="sm">
+
+              <LinkButton
+                href="/auth/signup/student"
+                variant="primary"
+                size="sm"
+              >
                 S&apos;inscrire
               </LinkButton>
             </div>
@@ -182,36 +188,37 @@ const Header = () => {
           {/* Mobile menu toggle and theme switcher */}
           <div className="md:hidden flex items-center space-x-2">
             <ThemeToggle />
+
             <button
-                className="flex items-center"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle menu"
+              className="flex items-center"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-            <svg
+              <svg
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-            >
-              {isMobileMenuOpen ? (
+              >
+                {isMobileMenuOpen ? (
                   <path
-                      d="M6 18L18 6M6 6L18 18"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    d="M6 18L18 6M6 6L18 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-              ) : (
+                ) : (
                   <path
-                      d="M4 6H20M4 12H20M4 18H20"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    d="M4 6H20M4 12H20M4 18H20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-              )}
-            </svg>
+                )}
+              </svg>
             </button>
           </div>
         </div>
@@ -219,41 +226,53 @@ const Header = () => {
         {/* Mobile menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-              <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800"
-              >
-                <div className="container-custom mx-auto px-4 py-4">
-                  <ul className="space-y-3">
-                    {menuItems.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                              href={item.href}
-                              className="block text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors py-2"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              style={fontStyles.sans}
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                    ))}
-                  </ul>
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800"
+            >
+              <div className="container-custom mx-auto px-4 py-4">
+                <ul className="space-y-3">
+                  {menuItems.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="block text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors py-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        style={fontStyles.sans}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
 
-                  <div className="mt-6 flex flex-col space-y-3">
-                    <div className="flex justify-center pb-3">
-                      <ThemeToggle />
-                    </div>
-                    <LinkButton href="/auth/login" variant="outline" size="sm" className="w-full">
-                      Connexion
-                    </LinkButton>
-                    <LinkButton href="/auth/signup" variant="primary" size="sm" className="w-full">
-                      S&apos;inscrire
-                    </LinkButton>
+                <div className="mt-6 flex flex-col space-y-3">
+                  <div className="flex justify-center pb-3">
+                    <ThemeToggle />
                   </div>
+
+                  <LinkButton
+                    href="/auth/login"
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                  >
+                    Connexion
+                  </LinkButton>
+
+                  <LinkButton
+                    href="/auth/signup"
+                    variant="primary"
+                    size="sm"
+                    className="w-full"
+                  >
+                    S&apos;inscrire
+                  </LinkButton>
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>
       </header>
